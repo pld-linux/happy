@@ -33,6 +33,7 @@ one program.
 
 %build
 autoconf
+chmod u+w configure
 %configure \
 	--libdir=%{_libdir}/happy-%{version}
 
