@@ -30,9 +30,9 @@ one program.
 
 %description -l pl
 Happy jest generatorem parserów LALR(1) dla Haskella - podobnym do
-yacc-a dla C. Generuja parser w Haskellu ze specyfikacji gramatyki w
-notacji BNF. Happy pozwala mieæ wiele wygenerowanych parserów w jednym
-programie.
+yacc-a dla C. Generuje parser w Haskellu ze specyfikacji gramatyki 
+w notacji BNF. Happy pozwala mieæ wiele wygenerowanych parserów 
+w jednym programie.
 
 %prep
 %setup -q
