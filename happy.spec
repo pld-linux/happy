@@ -32,6 +32,7 @@ one program.
 %patch1 -p1
 
 %build
+chmod u+w configure
 autoconf
 chmod u+w configure
 %configure \
