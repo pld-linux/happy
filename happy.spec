@@ -1,7 +1,7 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
-Version:	1.13
+Version:	1.14
 Release:	1
 License:	BSD w/o adv. clause
 Group:		Development/Languages
@@ -14,7 +14,7 @@ BuildRequires:	automake
 BuildRequires:	ghc
 BuildRequires:	gmp-devel
 BuildRequires:	jadetex
-BuildRequires:	libelf
+BuildRequires:	elfutils-libelf
 BuildRequires:	ncurses-devel
 BuildRequires:	openjade
 BuildRequires:	readline-devel
@@ -38,10 +38,11 @@ programie.
 %patch0 -p1
 
 %build
-%configure2_13 \
+%configure \
 	--with-gcc=%{__cc}
 
 %{__make} -C glafp-utils sgmlverb mkdirhier all
+%{__make} -C happy/src depend
 %{__make} -C happy all
 %{__make} -C happy/doc html ps
 
@@ -52,7 +53,7 @@ install -d $RPM_BUILD_ROOT{%{_mandir}/man1,%{_examplesdir}/happy}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install happy/examples/* $RPM_BUILD_ROOT%{_examplesdir}/happy/
+cp -a happy/examples/* $RPM_BUILD_ROOT%{_examplesdir}/happy/
 
 sed -e 's,@LIBDIR@,%{_libdir}/%{name}-%{version},g' \
 	-e 's,@DOCDIR@,%{_docdir}/%{name}-%{version},g' \
@@ -68,7 +69,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc happy/README happy/doc/happy.ps happy/doc/happy/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}-%{version}
-%dir %{_libdir}/%{name}-%{version}/happy
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/happy.bin
-%{_libdir}/%{name}-%{version}/happy/*
+%{_libdir}/%{name}-%{version}/Happy*
 %{_mandir}/man1/*
