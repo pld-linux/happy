@@ -70,7 +70,7 @@
  	done
  endif
  
-@@ -804,40 +804,40 @@
+@@ -804,42 +804,42 @@
  #
  ifneq "$(INSTALL_SCRIPTS)" ""
  install:: $(INSTALL_SCRIPTS)
@@ -116,13 +116,16 @@
  		  *.dll) \
 -		    $(INSTALL_DATA) -s $(INSTALL_OPTS) $$i $(libdir) ;; \
 +		    $(INSTALL_DATA) -s $(INSTALL_OPTS) $$i $(DESTDIR)$(libdir) ;; \
+ 		  *.so) \
+-		    $(INSTALL_SHLIB) $(INSTALL_OPTS) $$i $(libdir) ;; \
++		    $(INSTALL_SHLIB) $(INSTALL_OPTS) $$i $(DESTDIR)$(libdir) ;; \
  		  *) \
 -		    $(INSTALL_DATA) $(INSTALL_OPTS) $$i $(libdir); \
 +		    $(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(libdir); \
  		esac; \
  	done
  endif
-@@ -850,25 +850,25 @@
+@@ -850,33 +850,33 @@
  INSTALL_LIBEXECS := $(foreach p, $(INSTALL_LIBEXECS), $(addsuffix $(subst _,,$(subst __,$(exeext),_$(suffix $(p))_)), $(basename $(p))))
  
  install:: $(INSTALL_LIBEXECS)
@@ -141,6 +144,16 @@
  	for i in $(INSTALL_DATAS); do \
 -		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(datadir); \
 +		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(datadir); \
+ 	done
+ endif
+ 
+ ifneq "$(INSTALL_DATAS_WITH_DIRS)" ""
+ install:: $(INSTALL_DATAS_WITH_DIRS)
+-	@$(INSTALL_DIR) $(datadir)
++	@$(INSTALL_DIR) $(DESTDIR)$(datadir)
+ 	for i in $(INSTALL_DATAS_WITH_DIRS); do \
+-		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(datadir)/`dirname $$i`; \
++		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(datadir)/`dirname $$i`; \
  	done
  endif
  
