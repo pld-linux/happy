@@ -1,4 +1,5 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
+Summary(pl):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
 Version:	1.10
 Release:	2
@@ -11,6 +12,7 @@ Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-sgml-CATALOG.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-ac.patch
+BuildRequires:	autoconf
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
 BuildRequires:	libelf
@@ -26,6 +28,12 @@ Happy is a LALR(1) parser generator for Haskell - similar to yacc for
 C. It generates a Haskell parser from an annotated BNF specification
 of a grammar. Happy allows to have several Happy generated parsers in
 one program.
+
+%description -l pl
+Happy jest generatorem parserów LALR(1) dla Haskella - podobnym do
+yacc-a dla C. Generuja parser w Haskellu ze specyfikacji gramatyki w
+notacji BNF. Happy pozwala mieæ wiele wygenerowanych parserów w jednym
+programie.
 
 %prep
 %setup -q
@@ -57,9 +65,12 @@ sed -e 's,@LIBDIR@,%{_libdir}/%{name}-%{version},g' \
 	-e 's,@DOCDIR@,%{_docdir}/%{name}-%{version},g' \
 	-e 's,@VERSION@,%{version},g' \
 	happy/doc/happy.1.in > $RPM_BUILD_ROOT%{_mandir}/man1/happy.1
-ln -s happy-1.10 $RPM_BUILD_ROOT%{_bindir}/happy
+ln -sf happy-1.10 $RPM_BUILD_ROOT%{_bindir}/happy
 
 gzip -9nf happy/README happy/doc/happy.ps
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
@@ -70,6 +81,3 @@ gzip -9nf happy/README happy/doc/happy.ps
 %attr(755,root,root) %{_libdir}/%{name}-%{version}/happy.bin
 %{_libdir}/%{name}-%{version}/happy/*
 %{_mandir}/man1/*
-
-%clean
-rm -rf $RPM_BUILD_ROOT
