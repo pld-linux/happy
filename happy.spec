@@ -5,8 +5,6 @@ Version:	1.11
 Release:	1
 License:	BSD w/o adv. clause
 Group:		Development/Languages
-Group(de):	Entwicklung/Sprachen
-Group(pl):	Programowanie/Jêzyki
 URL:		http://haskell.org/happy/
 Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-sgml-CATALOG.patch
