@@ -20,6 +20,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	openjade
 BuildRequires:	readline-devel
 BuildRequires:	sgml-common
+BuildRequires:	tetex-dvips
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
