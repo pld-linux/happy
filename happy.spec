@@ -7,7 +7,7 @@ License:	BSD w/o adv. clause
 Group:		Development/Languages
 URL:		http://haskell.org/happy/
 Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
-# Source0-md5:	d17619ae6e2caf883651d88be38dfd8a
+# Source0-md5:	501b5b63533b2e2838de18085e8c4492
 Patch0:		%{name}-DESTDIR.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
