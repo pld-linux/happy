@@ -42,7 +42,7 @@ programie.
 %build
 chmod u+w configure
 aclocal
-autoconf
+%{__autoconf}
 chmod u+w configure
 %configure \
 	--with-gcc=%{__cc}
