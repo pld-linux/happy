@@ -1,8 +1,8 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
-Version:	1.10
-Release:	2
+Version:	1.11
+Release:	1
 License:	BSD w/o adv. clause
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -39,14 +39,15 @@ programie.
 %setup -q
 #%patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %build
 chmod u+w configure
+aclocal
 autoconf
 chmod u+w configure
 %configure \
-	--libdir=%{_libdir}/happy-%{version}
+	--with-gcc=%{__cc}
 
 %{__make} -C glafp-utils sgmlverb mkdirhier all
 %{__make} -C happy all
@@ -65,7 +66,7 @@ sed -e 's,@LIBDIR@,%{_libdir}/%{name}-%{version},g' \
 	-e 's,@DOCDIR@,%{_docdir}/%{name}-%{version},g' \
 	-e 's,@VERSION@,%{version},g' \
 	happy/doc/happy.1.in > $RPM_BUILD_ROOT%{_mandir}/man1/happy.1
-ln -sf happy-1.10 $RPM_BUILD_ROOT%{_bindir}/happy
+ln -sf happy-%{version} $RPM_BUILD_ROOT%{_bindir}/happy
 
 gzip -9nf happy/README happy/doc/happy.ps
 
