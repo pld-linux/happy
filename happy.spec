@@ -11,14 +11,15 @@ Patch0:		%{name}-sgml-CATALOG.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-ac.patch
 BuildRequires:	autoconf
-BuildRequires:	ncurses-devel
-BuildRequires:	readline-devel
-BuildRequires:	libelf
-BuildRequires:	gmp-devel
-BuildRequires:	sgml-common
-BuildRequires:	openjade
-BuildRequires:	jadetex
+BuildRequires:	automake
 BuildRequires:	ghc
+BuildRequires:	gmp-devel
+BuildRequires:	jadetex
+BuildRequires:	libelf
+BuildRequires:	ncurses-devel
+BuildRequires:	openjade
+BuildRequires:	readline-devel
+BuildRequires:	sgml-common
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -41,7 +42,7 @@ programie.
 
 %build
 chmod u+w configure
-aclocal
+%{__aclocal}
 %{__autoconf}
 chmod u+w configure
 %configure \
@@ -66,14 +67,12 @@ sed -e 's,@LIBDIR@,%{_libdir}/%{name}-%{version},g' \
 	happy/doc/happy.1.in > $RPM_BUILD_ROOT%{_mandir}/man1/happy.1
 ln -sf happy-%{version} $RPM_BUILD_ROOT%{_bindir}/happy
 
-gzip -9nf happy/README happy/doc/happy.ps
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc happy/README.gz happy/doc/happy.ps.gz happy/doc/happy/*
+%doc happy/README happy/doc/happy.ps happy/doc/happy/*
 %attr(755,root,root) %{_bindir}/*
 %dir %{_libdir}/%{name}-%{version}
 %dir %{_libdir}/%{name}-%{version}/happy
