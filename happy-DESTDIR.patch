@@ -1,11 +1,12 @@
---- ./mk/target.mk.org	Sun Jun 24 12:25:02 2001
-+++ ./mk/target.mk	Sun Jun 24 12:34:01 2001
-@@ -686,13 +686,13 @@
+diff -urN happy-1.14.org/mk/target.mk happy-1.14/mk/target.mk
+--- happy-1.14.org/mk/target.mk	2004-06-10 01:34:05.687256216 +0200
++++ happy-1.14/mk/target.mk	2004-06-10 01:38:42.351196904 +0200
+@@ -605,13 +605,13 @@
  # on perl.
  #
  $(LINK) : $(LINK_TARGET)
 -	@if ( $(PERL) -e '$$fn="$(LINK)"; exit ((! -f $$fn || -l $$fn) ? 0 : 1);' ); then \
-+	@if ( $(PERL) -e '$$fn="$(DESTDI)$(LINK)"; exit ((! -f $$fn || -l $$fn) ? 0 : 1);' ); then \
++	@if ( $(PERL) -e '$$fn="$(DESTDIR)$(LINK)"; exit ((! -f $$fn || -l $$fn) ? 0 : 1);' ); then \
  	   echo "Creating a symbolic link from $(LINK_TARGET) to $(LINK)"; \
 -	   $(RM) $(LINK); \
 -	   $(LN_S) $(LINK_TARGET) $(LINK); \
@@ -19,29 +20,29 @@
  	   exit 1; \
  	 fi;
  
-@@ -701,14 +701,14 @@
+@@ -620,14 +620,14 @@
  # install links to script drivers.
  #
  install ::
 -	@$(INSTALL_DIR) $(bindir)
 -	@if ( $(PERL) -e '$$fn="$(bindir)/$(LINK)"; exit ((! -f $$fn || -l $$fn) ? 0 : 1);' ); then \
--	   echo "Creating a symbol link from $(LINK_TARGET) to $(LINK) in $(bindir)"; \
+-	   echo "Creating a symbolic link from $(LINK_TARGET) to $(LINK) in $(bindir)"; \
 -	   $(RM) $(bindir)/$(LINK); \
 -	   $(LN_S) $(LINK_TARGET) $(bindir)/$(LINK); \
 +	@$(INSTALL_DIR) $(DESTDIR)$(bindir)
 +	@if ( $(PERL) -e '$$fn="$(DESTDIR)$(bindir)/$(LINK)"; exit ((! -f $$fn || -l $$fn) ? 0 : 1);' ); then \
-+	   echo "Creating a symbol link from $(LINK_TARGET) to $(LINK) in $(DESTDIR)$(bindir)"; \
++	   echo "Creating a symbolic link from $(LINK_TARGET) to $(LINK) in $(DESTDIR)$(bindir)"; \
 +	   $(RM) $(DESTDIR)$(bindir)/$(LINK); \
 +	   $(LN_S) $(LINK_TARGET) $(DESTDIR)$(bindir)/$(LINK); \
  	 else \
--	   echo "Creating a symbol link from $(LINK_TARGET) to $(LINK) in $(bindir) failed: \`$(bindir)/$(LINK)' already exists"; \
+-	   echo "Creating a symbolic link from $(LINK_TARGET) to $(LINK) in $(bindir) failed: \`$(bindir)/$(LINK)' already exists"; \
 -	   echo "Perhaps remove \`$(bindir)/$(LINK)' manually?"; \
-+	   echo "Creating a symbol link from $(LINK_TARGET) to $(LINK) in $(DESTDIR)$(bindir) failed: \`$(DESTDIR)$(bindir)/$(LINK)' already exists"; \
++	   echo "Creating a symbolic link from $(LINK_TARGET) to $(LINK) in $(DESTDIR)$(bindir) failed: \`$(DESTDIR)$(bindir)/$(LINK)' already exists"; \
 +	   echo "Perhaps remove \`$(DESTDIR)$(bindir)/$(LINK)' manually?"; \
  	   exit 1; \
  	 fi;
  
-@@ -751,10 +751,10 @@
+@@ -671,10 +671,10 @@
  # from the installation itself.
  #
  install-dirs ::
@@ -56,8 +57,8 @@
  
  # Better do this first...
  # but we won't for the moment, do it on-demand from
-@@ -791,10 +791,10 @@
- INSTALL_PROGS := $(foreach p, $(INSTALL_PROGS), $(addsuffix $(subst _,,$(subst __,$(exeext),_$(suffix $(p))_)), $(basename $(p))))
+@@ -695,10 +695,10 @@
+ INSTALL_PROGS := $(foreach p, $(INSTALL_PROGS), $(addsuffix $(if $(suffix $(p)),,$(exeext)), $(basename $(p))))
  
  install:: $(INSTALL_PROGS)
 -	@$(INSTALL_DIR) $(bindir)
@@ -70,7 +71,7 @@
  	done
  endif
  
-@@ -804,42 +804,42 @@
+@@ -708,42 +708,42 @@
  #
  ifneq "$(INSTALL_SCRIPTS)" ""
  install:: $(INSTALL_SCRIPTS)
@@ -125,7 +126,7 @@
  		esac; \
  	done
  endif
-@@ -850,33 +850,33 @@
+@@ -756,50 +756,50 @@
  INSTALL_LIBEXECS := $(foreach p, $(INSTALL_LIBEXECS), $(addsuffix $(subst _,,$(subst __,$(exeext),_$(suffix $(p))_)), $(basename $(p))))
  
  install:: $(INSTALL_LIBEXECS)
@@ -147,13 +148,23 @@
  	done
  endif
  
- ifneq "$(INSTALL_DATAS_WITH_DIRS)" ""
- install:: $(INSTALL_DATAS_WITH_DIRS)
--	@$(INSTALL_DIR) $(datadir)
-+	@$(INSTALL_DIR) $(DESTDIR)$(datadir)
- 	for i in $(INSTALL_DATAS_WITH_DIRS); do \
--		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(datadir)/`dirname $$i`; \
-+		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(datadir)/`dirname $$i`; \
+ ifneq "$(INSTALL_IFACES)" ""
+ install:: $(INSTALL_IFACES)
+-	@$(INSTALL_DIR) $(ifacedir)
++	@$(INSTALL_DIR) $(DESTDIR)$(ifacedir)
+ 	for i in $(INSTALL_IFACES); do \
+-		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(ifacedir); \
++		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(ifacedir); \
+ 	done
+ endif
+ 
+ ifneq "$(INSTALL_IFACES_WITH_DIRS)" ""
+ install:: $(INSTALL_IFACES_WITH_DIRS)
+-	@$(INSTALL_DIR) $(ifacedir)
++	@$(INSTALL_DIR) $(DESTDIR)$(ifacedir)
+ 	for i in $(INSTALL_IFACES_WITH_DIRS); do \
+-		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(ifacedir)/`dirname $$i`; \
++		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(ifacedir)/`dirname $$i`; \
  	done
  endif
  
@@ -167,7 +178,40 @@
  	done
  endif
  
-@@ -878,26 +878,26 @@
+ ifneq "$(INSTALL_DOCS)" ""
+ ifneq "$(SGMLDocWays)" ""
+ install-docs:: $(INSTALL_DOCS)
+-	@$(INSTALL_DIR) $(datadir)	
++	@$(INSTALL_DIR) $(DESTDIR)$(datadir)	
+ 	for i in $(INSTALL_DOCS); do \
+-		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(datadir); \
++		$(INSTALL_DATA) $(INSTALL_OPTS) $$i $(DESTDIR)$(datadir); \
+ 	done
+ endif
+ endif
+@@ -807,15 +807,15 @@
+ ifneq "$(INSTALL_SGML_DOC)" ""
+ ifneq "$(SGMLDocWays)" ""
+ install-docs:: $(foreach i,$(SGMLDocWays),$(INSTALL_SGML_DOC).$i)
+-	@$(INSTALL_DIR) $(datadir)	
++	@$(INSTALL_DIR) $(DESTDIR)$(datadir)	
+ 	@for i in $(SGMLDocWays); do \
+ 		if [ $$i = "html" ]; then \
+-			$(INSTALL_DIR) $(datadir)/html; \
+-			echo $(CP) -r $(INSTALL_SGML_DOC) $(datadir)/html; \
+-			$(CP) -r $(INSTALL_SGML_DOC) $(datadir)/html; \
++			$(INSTALL_DIR) $(DESTDIR)$(datadir)/html; \
++			echo $(CP) -r $(INSTALL_SGML_DOC) $(DESTDIR)$(datadir)/html; \
++			$(CP) -r $(INSTALL_SGML_DOC) $(DESTDIR)$(datadir)/html; \
+ 		else \
+-			echo $(INSTALL_DATA) $(INSTALL_OPTS) $(INSTALL_SGML_DOC).$$i $(datadir); \
+-			$(INSTALL_DATA) $(INSTALL_OPTS) $(INSTALL_SGML_DOC).$$i $(datadir); \
++			echo $(INSTALL_DATA) $(INSTALL_OPTS) $(INSTALL_SGML_DOC).$$i $(DESTDIR)$(datadir); \
++			$(INSTALL_DATA) $(INSTALL_OPTS) $(INSTALL_SGML_DOC).$$i $(DESTDIR)$(datadir); \
+ 		fi \
+ 	done
+ endif
+@@ -827,26 +827,26 @@
  uninstall:: 
  	@for i in $(INSTALL_PROGS) "" ; do			\
  	  if test "$$i"; then 					\
