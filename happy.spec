@@ -41,6 +41,7 @@ w jednym programie.
 %patch1 -p1
 
 %build
+cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	--with-gcc=%{__cc}
