@@ -9,6 +9,7 @@ URL:		http://haskell.org/happy/
 Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
 # Source0-md5:	501b5b63533b2e2838de18085e8c4492
 Patch0:		%{name}-DESTDIR.patch
+Patch1:		%{name}-arch.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	ghc
@@ -36,8 +37,10 @@ programie.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
+%{__autoconf}
 %configure \
 	--with-gcc=%{__cc}
 
