@@ -1,7 +1,7 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Name:		happy
 Version:	1.10
-Release:	1
+Release:	2
 License:	BSD w/o adv. clause
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
@@ -10,6 +10,7 @@ URL:		http://haskell.org/happy/
 Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-sgml-CATALOG.patch
 Patch1:		%{name}-DESTDIR.patch
+Patch2:		%{name}-ac.patch
 BuildRequires:	ncurses-devel
 BuildRequires:	readline-devel
 BuildRequires:	libelf
@@ -30,6 +31,7 @@ one program.
 %setup -q
 #%patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 chmod u+w configure
