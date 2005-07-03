@@ -77,3 +77,4 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/%{name}-%{version}/Happy*
 %{_libdir}/%{name}-%{version}/GLR*
 %{_mandir}/man1/*
+%{_examplesdir}/%{name}
