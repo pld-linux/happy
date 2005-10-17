@@ -1,8 +1,12 @@
+#
+# Conditional build:
+%bcond_with	bootstrap	# use foreign (non-rpm) ghc
+#
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
 Version:	1.15
-Release:	1
+Release:	2
 License:	BSD w/o adv. clause
 Group:		Development/Languages
 URL:		http://haskell.org/happy/
@@ -11,7 +15,7 @@ Source0:	http://haskell.org/happy/dist/%{version}/%{name}-%{version}-src.tar.gz
 Patch0:		%{name}-arch.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	ghc
+%{!?with_bootstrap:BuildRequires:	ghc}
 BuildRequires:	gmp-devel
 BuildRequires:	jadetex
 BuildRequires:	elfutils-libelf
