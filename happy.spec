@@ -46,7 +46,7 @@ programie.
 cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
-	--with-gcc=%{__cc}
+	--with-gcc="%{__cc}"
 
 %{__make} -C glafp-utils sgmlverb mkdirhier all
 %{__make} -C happy/src depend
