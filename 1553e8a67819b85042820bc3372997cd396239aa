@@ -1,0 +1,5 @@
+- updated to 1.11
+- removed (commented) unncecessary ac patch
+- corrected %configure (libdir should be default now)
+- cosmetics (using version macro in linking)
+- passing %{__cc} as gcc to configure
