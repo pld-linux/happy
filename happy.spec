@@ -3,7 +3,7 @@
 %bcond_with	bootstrap	# use foreign (non-rpm) ghc
 #
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
-Summary(pl):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
+Summary(pl.UTF-8):   Generator parserÃ³w LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
 Version:	1.15
 Release:	2
@@ -32,10 +32,10 @@ C. It generates a Haskell parser from an annotated BNF specification
 of a grammar. Happy allows to have several Happy generated parsers in
 one program.
 
-%description -l pl
-Happy jest generatorem parserów LALR(1) dla Haskella - podobnym do
+%description -l pl.UTF-8
+Happy jest generatorem parserÃ³w LALR(1) dla Haskella - podobnym do
 yacc-a dla C. Generuje parser w Haskellu ze specyfikacji gramatyki w
-notacji BNF. Happy pozwala mieæ wiele wygenerowanych parserów w jednym
+notacji BNF. Happy pozwala mieÄ‡ wiele wygenerowanych parserÃ³w w jednym
 programie.
 
 %prep
