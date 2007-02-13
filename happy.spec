@@ -3,7 +3,7 @@
 %bcond_with	bootstrap	# use foreign (non-rpm) ghc
 #
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
-Summary(pl.UTF-8):   Generator parserów LALR(1) w stylu yacc-a dla Haskella
+Summary(pl.UTF-8):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
 Version:	1.15
 Release:	2
