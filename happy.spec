@@ -16,6 +16,7 @@ BuildRequires:	autoconf
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
 %{!?with_bootstrap:BuildRequires:	ghc >= 6.6}
+BuildRequires:	ghc-mtl
 BuildRequires:	gmp-devel
 BuildRequires:	libxslt-progs
 #For generating documentation in PDF: fop or xmltex
