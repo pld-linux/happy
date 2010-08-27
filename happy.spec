@@ -10,7 +10,7 @@ Release:	1
 License:	BSD-like w/o adv. clause
 Group:		Development/Tools
 Source0:	http://hackage.haskell.org/packages/archive/happy/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	614e3ef9623dbeefc4c8ca699912efb4
+# Source0-md5:	9e77b67df7b6a4d7273383cc890f39e8
 URL:		http://haskell.org/happy/
 BuildRequires:	autoconf
 BuildRequires:	docbook-dtd42-xml
