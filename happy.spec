@@ -12,7 +12,7 @@ Group:		Development/Tools
 Source0:	http://hackage.haskell.org/packages/archive/happy/%{version}/%{name}-%{version}.tar.gz
 # Source0-md5:	a1638e89434427e57f68ef311761dc30
 URL:		http://haskell.org/happy/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
 %{!?with_bootstrap:BuildRequires:	ghc >= 6.6}
