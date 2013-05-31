@@ -6,7 +6,7 @@ Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl.UTF-8):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
 Version:	1.18.10
-Release:	1
+Release:	2
 License:	BSD-like w/o adv. clause
 Group:		Development/Tools
 Source0:	http://hackage.haskell.org/packages/archive/happy/%{version}/%{name}-%{version}.tar.gz
@@ -78,6 +78,11 @@ runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}
 cp -a examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+
+# work around automatic haddock docs installation
+%{__rm} -rf %{name}-%{version}-doc
+cp -a $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} %{name}-%{version}-doc
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
