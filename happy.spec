@@ -5,18 +5,19 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl.UTF-8):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
-Version:	1.18.10
-Release:	2
+Version:	1.19.2
+Release:	1
 License:	BSD-like w/o adv. clause
 Group:		Development/Tools
-Source0:	http://hackage.haskell.org/packages/archive/happy/%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	a1638e89434427e57f68ef311761dc30
-URL:		http://haskell.org/happy/
+#Source0Download: http://hackage.haskell.org/package/happy
+Source0:	http://hackage.haskell.org/package/happy-%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	36602c3c6e3004f49754ea6c173d2c39
+URL:		http://www.haskell.org/happy/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
 %{!?with_bootstrap:BuildRequires:	ghc >= 6.6}
-BuildRequires:	ghc-mtl
+BuildRequires:	ghc-mtl >= 1.0
 BuildRequires:	gmp-devel
 BuildRequires:	libxslt-progs
 #For generating documentation in PDF: fop or xmltex
