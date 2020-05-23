@@ -5,13 +5,13 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl.UTF-8):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
-Version:	1.19.2
+Version:	1.19.12
 Release:	1
 License:	BSD-like w/o adv. clause
 Group:		Development/Tools
 #Source0Download: http://hackage.haskell.org/package/happy
 Source0:	http://hackage.haskell.org/package/happy-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	36602c3c6e3004f49754ea6c173d2c39
+# Source0-md5:	56709ae8037295eb74c4793df947d8d2
 URL:		http://www.haskell.org/happy/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-dtd42-xml
@@ -63,8 +63,8 @@ Autorzy:
 
 %build
 %{?with_bootstrap:PATH=$PATH:/usr/local/bin}
-runhaskell Setup.lhs configure --prefix=%{_prefix}
-runhaskell Setup.lhs build
+runhaskell Setup.hs configure --prefix=%{_prefix}
+runhaskell Setup.hs build
 
 cd doc
 %{__autoconf}
@@ -75,7 +75,7 @@ cd ..
 %install
 rm -rf $RPM_BUILD_ROOT
 %{?with_bootstrap:PATH=$PATH:/usr/local/bin}
-runhaskell Setup.lhs copy --destdir=$RPM_BUILD_ROOT
+runhaskell Setup.hs copy --destdir=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}
 cp -a examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
@@ -90,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ANNOUNCE CHANGES README TODO doc/happy
+%doc ANNOUNCE CHANGES README.md TODO doc/happy
 %attr(755,root,root) %{_bindir}/happy
 %{_datadir}/%{name}-%{version}
 %{_examplesdir}/%{name}-%{version}
