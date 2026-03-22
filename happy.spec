@@ -17,7 +17,10 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
 %{!?with_bootstrap:BuildRequires:	ghc >= 6.6}
-BuildRequires:	ghc-mtl >= 1.0
+BuildRequires:	ghc-array
+BuildRequires:	ghc-base < 5
+BuildRequires:	ghc-containers
+BuildRequires:	ghc-mtl >= 2.2.1
 BuildRequires:	gmp-devel
 BuildRequires:	libxslt-progs
 #For generating documentation in PDF: fop or xmltex
@@ -67,6 +70,7 @@ Autorzy:
 %build
 %{?with_bootstrap:PATH=$PATH:/usr/local/bin}
 runhaskell Setup.hs configure --prefix=%{_prefix}
+
 runhaskell Setup.hs build
 
 cd doc
@@ -78,6 +82,7 @@ cd ..
 %install
 rm -rf $RPM_BUILD_ROOT
 %{?with_bootstrap:PATH=$PATH:/usr/local/bin}
+
 runhaskell Setup.hs copy --destdir=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}
@@ -85,15 +90,14 @@ cp -a examples $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 # work around automatic haddock docs installation
 %{__rm} -rf %{name}-%{version}-doc
-cp -a $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} %{name}-%{version}-doc
-%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+%{__mv} $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} %{name}-%{version}-doc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ANNOUNCE CHANGES README.md TODO doc/happy
+%doc ANNOUNCE CHANGES LICENSE README.md TODO doc/happy
 %attr(755,root,root) %{_bindir}/happy
 %{_datadir}/%{name}-%{version}
 %{_examplesdir}/%{name}-%{version}
