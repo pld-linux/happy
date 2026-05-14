@@ -5,25 +5,24 @@
 Summary:	Yacc-like LALR(1) Parser Generator for Haskell
 Summary(pl.UTF-8):	Generator parserów LALR(1) w stylu yacc-a dla Haskella
 Name:		happy
-Version:	1.19.12
-Release:	2
+Version:	1.20.1.1
+Release:	1
 License:	BSD-like w/o adv. clause
 Group:		Development/Tools
 #Source0Download: http://hackage.haskell.org/package/happy
 Source0:	http://hackage.haskell.org/package/happy-%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	56709ae8037295eb74c4793df947d8d2
+# Source0-md5:	2dcd1c6a080db2c80546efe0b740eadf
 URL:		http://www.haskell.org/happy/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	docbook-dtd42-xml
 BuildRequires:	docbook-style-xsl
-%{!?with_bootstrap:BuildRequires:	ghc >= 6.6}
+%{!?with_bootstrap:BuildRequires:	ghc >= 9.2}
 BuildRequires:	ghc-array
 BuildRequires:	ghc-base < 5
 BuildRequires:	ghc-containers
 BuildRequires:	ghc-mtl >= 2.2.1
 BuildRequires:	gmp-devel
 BuildRequires:	libxslt-progs
-#For generating documentation in PDF: fop or xmltex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # debuginfo is not useful for ghc
@@ -97,7 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ANNOUNCE CHANGES LICENSE README.md TODO doc/happy
+%doc ChangeLog.md LICENSE doc/happy
 %attr(755,root,root) %{_bindir}/happy
 %{_datadir}/%{name}-%{version}
 %{_examplesdir}/%{name}-%{version}
